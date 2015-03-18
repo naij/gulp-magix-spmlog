@@ -24,12 +24,13 @@ function spmlog(options) {
         var filename = file.relative;
         var clickStr = 'gostr=/' + logkey + ';locaid=d';
 
-        // 如果已经生成过data-spm-click属性的节点需要跳过
+        // 如果已经生成过data-spm-click属性的节点，直接跳过
+        // 因为data-spm-click属性需要保持固定，只生成一次
         filter.forEach(function (item) {
             var matchExpr = new RegExp('(' + item + '(?!\\s*data-spm-click="[^\\"]+"))', 'g');
             html = html.replace(matchExpr, function (m, $1) {
                 var locaid = sutil.genRandom().substring(0, 8);
-                return $1 + ' data-spm-click="' + clickStr + locaid + '"';
+                return $1 + ' ' + 'data-spm-click="' + clickStr + locaid + '"';
             });
         });
 

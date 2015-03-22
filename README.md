@@ -39,6 +39,19 @@ gulp.task('spmlog', function () {
 
     目前支持：
 
-    * id选择器（例如：'#main'）
-    * class选择器（例如：'.content'）
-    * attr部分选择器（例如：'[href^="#!"]' '[mx-click]' '[src$=".jpg"]' '[custom*="value"]'）
+    * id选择器
+    * class选择器
+    * attr选择器
+
+    各个选择器格式：
+
+    * id选择器： 
+        * '#main' 匹配`id`值为`main`的元素
+    * class选择器：
+        * '.content' 匹配`class`值为`content`的所有元素
+    * attr选择器：
+        * '[mx-click]' 匹配带有 `mx-click` 属性的所有元素
+        * '[href="#"]' 匹配带有 `href` 属性并且属性值为`#`的所有元素
+        * '[href^="#!"]' 匹配带有 `href` 属性并且属性值以`#!`开头的所有元素
+        * '[src$="jpg"]' 匹配带有 `href` 属性并且属性值以`jpg`结尾的所有元素
+        * '[custom*="value"]' 匹配带有 `custom` 属性并且属性值包含`value`的所有元素

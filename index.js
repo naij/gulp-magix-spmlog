@@ -4,6 +4,7 @@ var util      = require('util');
 var gutil     = require('gulp-util');
 var through2  = require('through2');
 var sutil     = require('./lib/sutil');
+var sizzle    = require('./lib/sizzle');
 var Error     = gutil.PluginError;
 
 
@@ -21,11 +22,11 @@ function spmlog(options) {
     return through2.obj(function(file, enc, cb) {
 
         if (!logkey) {
-            return cb(Error('spmlog', '缺少黄金令箭埋点串字段:logkey'));
+            return cb(new Error('spmlog', '缺少黄金令箭埋点串字段：logkey'));
         }
 
         if (!filter || !util.isArray(filter)) {
-            return cb(Error('spmlog', '缺少元素筛选规则字段:filter'));
+            return cb(new Error('spmlog', '缺少元素过滤规则字段：filter'));
         }
 
         var html = file.contents.toString('utf8');
@@ -33,10 +34,22 @@ function spmlog(options) {
         var clickStr = 'gostr=/' + logkey + ';locaid=d';
 
         filter.forEach(function (item) {
-            var matchExpr = new RegExp('(' + item + '(?!\\s*data-spm-click="[^\\"]+"))', 'g');
-            html = html.replace(matchExpr, function (m, $1) {
-                var locaid = sutil.genRandom().substring(0, 8);
-                return $1 + ' ' + 'data-spm-click="' + clickStr + locaid + '"';
+            var pattern = sizzle(item);
+
+            if (!pattern || !util.isArray(pattern)) {
+                return cb(new Error('spmlog', 'spmlog暂不支持此元素过滤器：' + item));
+            }
+
+            var rmatch = new RegExp('(' + pattern[0] + '(?!\\s*data-spm-click="[^\\"]+"))', 'g');
+            var rvalue = new RegExp(pattern[1]);
+            
+            html = html.replace(rmatch, function (m, $1, $2) {
+                if (rvalue.test($2)) {
+                    var locaid = sutil.genRandom().substring(0, 8);
+                    return $1 + ' ' + 'data-spm-click="' + clickStr + locaid + '"';
+                } else {
+                    return $1;
+                }
             });
         });
 

@@ -17,10 +17,10 @@ var spmlog  = require('gulp-magix-spmlog');
 gulp.task('spmlog', function () {
     gulp.src('./app/views/*/*.html')
         .pipe(spmlog({
-            logkey: 'tblm.88.1',
+            logkey: 'mylogkey',
             filter: [
-                'mx-click="[^\\"]+"',
-                'href="#![^\\"]+"'
+                '[mx-click]',
+                '[href^="#!"]'
             ]
         }))
         .pipe(gulp.dest('./app/views'));
@@ -35,4 +35,8 @@ gulp.task('spmlog', function () {
 
 - `filter`
     
-    需要埋点的元素过滤器（必填），只有满足相关过滤器的元素才会打点。支持正则。
+    需要埋点的元素过滤器（必填），只有满足相关过滤器的元素才会打点。目前支持：
+
+    * id选择器（例：'#main'）
+    * class选择器（例：'.content'）
+    * attr部分选择器（例：'[href^="#!"]'、'[mx-click]'、'[src$=".jpg"]'、'[custom*="value"]'）

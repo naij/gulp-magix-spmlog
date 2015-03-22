@@ -1,6 +1,6 @@
 # gulp-magix-spmlog
 
-[![NPM version](https://img.shields.io/badge/npm-v1.0.0-orange.svg)](https://www.npmjs.org/package/gulp-magix-spmlog)
+[![NPM version](https://img.shields.io/badge/npm-v1.0.1-orange.svg)](https://www.npmjs.org/package/gulp-magix-spmlog)
 
 ## Installation
 
@@ -32,6 +32,8 @@ gulp.task('spmlog', function () {
 - `logkey`
     
     其值为黄金令箭中的所属业务段（必填），业务段在令箭申请中心申请，用于令箭日志数据的订阅和分发，在后续扩展实时计算和展现的时候十分重要。
+
+    * 如果模板里面已经存在logkey，并且与当前要设置的logkey不相同，则会被替换为设置的logkey *
 
 - `filter`
     

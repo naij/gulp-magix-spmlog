@@ -32,6 +32,16 @@ function spmlog(options) {
         var html = file.contents.toString('utf8');
         var filename = file.relative;
         var clickStr = 'gostr=/' + logkey + ';locaid=d';
+        var rlogkey = new RegExp('(gostr=\\/([^\\"]+);)', 'g');
+
+        // 如果原来就有logkey并且与当前要设置的不相同，则替换成新的
+        html = html.replace(rlogkey, function (m, $1, $2) {
+            if ($2 && $2 != logkey) {
+                return 'gostr=/' + logkey + ';';
+            } else {
+                return $1;
+            }
+        });
 
         filter.forEach(function (item) {
             var pattern = sizzle(item);
@@ -39,7 +49,7 @@ function spmlog(options) {
             if (!pattern || !util.isArray(pattern)) {
                 return cb(new Error('spmlog', 'spmlog暂不支持此元素过滤器：' + item));
             }
-
+            
             var rmatch = new RegExp('(' + pattern[0] + '(?!\\s*data-spm-click="[^\\"]+"))', 'g');
             var rvalue = new RegExp(pattern[1]);
             

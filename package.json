@@ -1,7 +1,11 @@
 {
   "name": "gulp-magix-spmlog",
   "description": "Magix应用 spm+黄金令箭自动化埋点工具",
-  "version": "1.0.3",
+  "keywords": [
+    "magix",
+    "spm"
+  ],
+  "version": "1.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/naij/gulp-magix-spmlog"
@@ -13,6 +17,7 @@
     "gulp-util": "3.0.4",
     "through2": "0.6.3"
   },
+  "main": "index.js",
   "licenses": "MIT",
   "bugs": {
     "url": "https://github.com/naij/gulp-magix-spmlog/issues"

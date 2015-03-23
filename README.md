@@ -1,6 +1,6 @@
 # gulp-magix-spmlog
 
-[![NPM version](https://img.shields.io/badge/npm-v1.0.1-orange.svg)](https://www.npmjs.org/package/gulp-magix-spmlog)
+[![NPM version](https://img.shields.io/badge/npm-v1.0.2-orange.svg)](https://www.npmjs.org/package/gulp-magix-spmlog)
 
 ## Installation
 

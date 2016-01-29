@@ -5,7 +5,7 @@
     "magix",
     "spm"
   ],
-  "version": "1.0.4",
+  "version": "1.0.6",
   "repository": {
     "type": "git",
     "url": "https://github.com/naij/gulp-magix-spmlog"

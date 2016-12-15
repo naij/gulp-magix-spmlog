@@ -17,16 +17,12 @@ var Error     = gutil.PluginError
 
 function spmlog(options) {
   var logkey = options.logkey
-  var filter = options.filter
+  var filter = options.filter || []
 
   return through2.obj(function(file, enc, cb) {
 
     if (!logkey) {
       return cb(new Error('spmlog', '缺少黄金令箭埋点串字段：logkey'))
-    }
-
-    if (!filter || !util.isArray(filter)) {
-      return cb(new Error('spmlog', '缺少元素过滤规则字段：filter'))
     }
 
     var html = file.contents.toString('utf8')

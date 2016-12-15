@@ -1,6 +1,9 @@
 {
   "name": "gulp-magix-spmlog",
   "description": "Magix应用 spm+黄金令箭自动化埋点工具",
+  "scripts": {
+    "test": "mocha"
+  },
   "keywords": [
     "magix",
     "spm"
@@ -14,8 +17,12 @@
     "name": "Naij"
   },
   "dependencies": {
-    "gulp-util": "3.0.4",
+    "gulp-util": "~3.0.7",
     "through2": "0.6.3"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "should": "^11.1.2"
   },
   "main": "index.js",
   "licenses": "MIT",
